@@ -51,22 +51,27 @@ To install dyndns-go, download the appropriate binary for your operating system 
 ## Build from Source
 
 1. Clone the repository:
+   
    ```sh
    git clone https://github.com/harrybawsac/dyndns-go.git
    ```
 2. Change into the project directory:
+   
    ```sh
    cd dyndns-go
    ```
 3. Build the binary:
+   
    ```sh
    go build -o dyndns-go main.go
    ```
 4. Move the binary to a directory in your `PATH`:
+   
    ```sh
    mv dyndns-go /usr/local/bin/
    ```
 5. Verify the installation:
+   
    ```sh
    dyndns-go
    ```
@@ -93,10 +98,10 @@ The configuration file must be in JSON format and include your registrar credent
 ```json
 {
   "user": "yourstratodomain.com",
-  "password": "asdfasdfasdfasfd",
+  "password": "PASSWORD",
   "host": "test.yourstratodomain.com",
-  "unifiSiteManagerApiKey": "asdfasdfasdfasfd",
-  "unifiSiteManagerHostId": "asdfasdfasdfasfd",
+  "unifiSiteManagerApiKey": "API_KEY",
+  "unifiSiteManagerHostId": "HOST_ID",
   "updateIpv4": true,
   "updateIpv6": true
 }
