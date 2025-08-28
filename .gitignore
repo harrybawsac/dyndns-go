@@ -1,0 +1,14 @@
+.vscode/
+config.json
+storage.json
+
+# Add Go-specific ignores
+*.exe
+*.exe~
+*.out
+*.log
+*.test
+*.mod
+*.sum
+vendor/
+dyndns-go
