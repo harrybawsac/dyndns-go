@@ -12,3 +12,4 @@ storage.json
 *.sum
 vendor/
 dyndns-go
+bin/
