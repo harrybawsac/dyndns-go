@@ -1,0 +1,10 @@
+{
+  "registrar": "strato",
+  "user": "yourstratodomain.com",
+  "password": "somethingyousetup",
+  "host": "test.yourstratodomain.com",
+  "unifiSiteManagerApiKey": "yourunifiapikey",
+  "unifiSiteManagerHostId": "yourunifihostid",
+  "updateIpv4": true,
+  "updateIpv6": true
+}

@@ -1,26 +1,29 @@
 package lib
 
 import (
+	"context"
 	"encoding/json"
 	"os"
 )
 
-// Config holds configuration values for Strato DNS and Unifi Site Manager integration.
+// Registrar interface for DNS update operations
+type Registrar interface {
+	UpdateDNS(ctx context.Context, config *Config, ipv4, ipv6 string) error
+}
+
+// Config holds configuration values for DNS update, supporting multiple registrars.
 type Config struct {
-	// User: a domain from your domains registered at Strato (example: yourstratodomain.com).
-	User string `json:"user"`
-	// Password: your Dynamic DNS password setup in Strato.
-	Password string `json:"password"`
-	// Host: domain or subdomain you want to update (example: test.yourstratodomain.com).
-	Host string `json:"host"`
-	// UnifiSiteManagerApiKey is your Unifi Site Manager API key.
+	Registrar string `json:"registrar"` // e.g., "strato", "dyndns", "noip"
+	User      string `json:"user"`
+	Password  string `json:"password"`
+	Host      string `json:"host"`
+	// Registrar-specific options
+	Options map[string]string `json:"options"`
+	// Unifi fields (optional)
 	UnifiSiteManagerApiKey string `json:"unifiSiteManagerApiKey"`
-	// UnifiSiteManagerHostId is your Unifi Site Manager host ID.
 	UnifiSiteManagerHostId string `json:"unifiSiteManagerHostId"`
-	// UpdateIpv4 specifies whether to update the IPv4 address.
-	UpdateIpv4 bool `json:"updateIpv4"`
-	// UpdateIpv6 specifies whether to update the IPv6 address.
-	UpdateIpv6 bool `json:"updateIpv6"`
+	UpdateIpv4             bool   `json:"updateIpv4"`
+	UpdateIpv6             bool   `json:"updateIpv6"`
 }
 
 // LoadConfig loads configuration from the specified JSON file path.
@@ -39,6 +42,9 @@ func LoadConfig(path string) (*Config, error) {
 	}
 
 	// Validate required fields
+	if config.Registrar == "" {
+		return nil, &ConfigError{"Registrar is not set"}
+	}
 	if config.User == "" {
 		return nil, &ConfigError{"User is not set"}
 	}
@@ -47,12 +53,6 @@ func LoadConfig(path string) (*Config, error) {
 	}
 	if config.Host == "" {
 		return nil, &ConfigError{"Host is not set"}
-	}
-	if config.UnifiSiteManagerApiKey == "" {
-		return nil, &ConfigError{"UnifiSiteManagerApiKey is not set"}
-	}
-	if config.UnifiSiteManagerHostId == "" {
-		return nil, &ConfigError{"UnifiSiteManagerHostId is not set"}
 	}
 	if !config.UpdateIpv4 && !config.UpdateIpv6 {
 		return nil, &ConfigError{"UpdateIpv4 and UpdateIpv6 cannot both be false"}

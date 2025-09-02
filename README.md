@@ -17,7 +17,6 @@ Managing dynamic IP addresses can be a hassle for self-hosted services, remote a
 - [Usage](#usage)
 - [Configuration File](#configuration-file)
 - [Automation](#automation)
-- [Contributions](#contributions)
 
 # Features
 
@@ -51,27 +50,31 @@ To install dyndns-go, download the appropriate binary for your operating system 
 ## Build from Source
 
 1. Clone the repository:
-   
+
    ```sh
    git clone https://github.com/harrybawsac/dyndns-go.git
    ```
+
 2. Change into the project directory:
-   
+
    ```sh
    cd dyndns-go
    ```
+
 3. Build the binary:
-   
+
    ```sh
    go build -o dyndns-go main.go
    ```
+
 4. Move the binary to a directory in your `PATH`:
-   
+
    ```sh
    mv dyndns-go /usr/local/bin/
    ```
+
 5. Verify the installation:
-   
+
    ```sh
    dyndns-go
    ```
@@ -97,6 +100,7 @@ The configuration file must be in JSON format and include your registrar credent
 
 ```json
 {
+  "registrar": "strato",
   "user": "yourstratodomain.com",
   "password": "PASSWORD",
   "host": "test.yourstratodomain.com",
@@ -109,6 +113,7 @@ The configuration file must be in JSON format and include your registrar credent
 
 ### Configuration Fields
 
+- `registrar`: The DNS registrar to use (currently only "strato" is supported)
 - `user`: Your Strato domain username
 - `password`: Your Strato domain password
 - `host`: The hostname to update
@@ -128,23 +133,3 @@ You can automate DNS updates using cron or other scheduling tools. Example cron 
 ```
 
 This ensures your DNS records stay up-to-date even if your IP changes.
-
-## Contributions
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository on GitHub.
-2. Create a new branch for your feature or bugfix.
-3. Make your changes and commit them with clear messages.
-4. Open a pull request describing your changes.
-
-### Guidelines
-
-- Follow Go best practices and code style.
-- Write clear, concise documentation and comments.
-- Add tests for new features or bugfixes.
-- Be respectful and constructive in discussions.
-
-### Issues & Support
-
-If you find a bug or have a feature request, open an issue on GitHub. For questions, join the community chat or discussion board.

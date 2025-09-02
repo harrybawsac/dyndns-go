@@ -1,9 +1,0 @@
-{
-  "user": "yourstratodomain.com",
-  "password": "asdfasdfasdfasfd",
-  "host": "test.yourstratodomain.com",
-  "unifiSiteManagerApiKey": "asdfasdfasdfasfd",
-  "unifiSiteManagerHostId": "asdfasdfasdfasfd",
-  "updateIpv4": true,
-  "updateIpv6": true
-}
