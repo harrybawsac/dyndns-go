@@ -8,15 +8,21 @@ Managing dynamic IP addresses can be a hassle for self-hosted services, remote a
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
+- [dyndns-go  ](#dyndns-go--)
+  - [Project Overview](#project-overview)
+  - [Table of Contents](#table-of-contents)
 - [Features](#features)
-- [Disclaimer](#disclaimer)
-- [Currently Supported Registrars](#currently-supported-registrars)
-- [Installation](#installation)
-- [Build from Source](#build-from-source)
-- [Usage](#usage)
-- [Configuration File](#configuration-file)
-- [Automation](#automation)
+  - [Disclaimer](#disclaimer)
+  - [Currently Supported Registrars](#currently-supported-registrars)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+  - [Build from Source](#build-from-source)
+  - [Usage](#usage)
+    - [Command Line Options](#command-line-options)
+  - [Configuration File](#configuration-file)
+    - [Configuration Fields](#configuration-fields)
+  - [Automation](#automation)
+  - [Manual overrides](#manual-overrides)
 
 # Features
 
@@ -133,3 +139,15 @@ You can automate DNS updates using cron or other scheduling tools. Example cron 
 ```
 
 This ensures your DNS records stay up-to-date even if your IP changes.
+
+## Manual overrides
+
+```sh
+curl -u "USERNAME:PASSWORD" \
+  "https://dyndns.strato.com/nic/update?hostname=example.domain.com&myip=123.123.123.123"
+```
+
+```sh
+curl -u "USERNAME:PASSWORD" \
+  "https://dyndns.strato.com/nic/update?hostname=example.domain.com&myip=100::"
+```
